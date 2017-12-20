@@ -38,5 +38,9 @@ resources: {}
   #  memory: 128Mi
 config: {}
 configSecure: {}
+networkPolicy:
+  ## Enable creation of NetworkPolicy resources.
+  ##
+  enabled: false
 mongodb:
   enabled: true
