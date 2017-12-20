@@ -49,8 +49,14 @@ resources: {}
 ## See https://github.com/errbit/errbit/blob/master/docs/configuration.md for the available environment variables
 ## You can store them in config and configSecure. The difference is that the one uses a ConfigMap, the other a Secret
 config:
-  PORT: '8080'
+  ERRBIT_EMAIL_FROM: "errbit.noreply@example.com"
   ERRBIT_ENFORCE_SSL: "false"
+  ERRBIT_HOST: "errbit.example.local"
+  ERRBIT_PORT: "80"
+  ERRBIT_PROTOCOL: http
+  ERRBIT_USE_GRAVATAR: "true"
+  PORT: '8080'
+  RACK_ENV: production
 configSecure: 
   SECRET_KEY_BASE: "please change me"
 
