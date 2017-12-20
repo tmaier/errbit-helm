@@ -2,7 +2,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: {{ template "errbit-helm.fullname" . }}-hook-bootstrap
+  name: {{ template "errbit-helm.fullname" . }}-bootstrap
   labels:
     app: {{ template "errbit-helm.name" . }}
     chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
