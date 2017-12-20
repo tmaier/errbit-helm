@@ -1,9 +1,9 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: {{ template "errbit.fullname" . }}
+  name: {{ template "errbit-helm.fullname" . }}
   labels:
-    app: {{ template "errbit.name" . }}
+    app: {{ template "errbit-helm.name" . }}
     chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
@@ -12,7 +12,7 @@ spec:
   template:
     metadata:
       labels:
-        app: {{ template "errbit.name" . }}
+        app: {{ template "errbit-helm.name" . }}
         release: {{ .Release.Name }}
       annotations:
         checksum/secret: {{ include (print $.Template.BasePath "/secret.yaml") . | sha256sum }}
@@ -28,7 +28,7 @@ spec:
             - containerPort: {{ .Values.service.internalPort }}
           env:
             - name: MONGODB_USERNAME
-              value: {{ template "errbit.mongodbUsername" . }}
+              value: {{ template "errbit-helm.mongodbUsername" . }}
             {{- if .Values.mongodb.enabled }}
             - name: MONGODB_PASSWORD
               valueFrom:
@@ -37,16 +37,16 @@ spec:
                   key: mongodb-password
             {{- end }}
             - name: MONGODB_HOST
-              value: {{ template "errbit.mongodbHost" . }}
+              value: {{ template "errbit-helm.mongodbHost" . }}
             - name: MONGODB_PORT
-              value: {{ template "errbit.mongodbPort" . }}
+              value: {{ template "errbit-helm.mongodbPort" . }}
             - name: MONGODB_DATABASE
-              value: {{ template "errbit.mongodbDatabase" . }}
+              value: {{ template "errbit-helm.mongodbDatabase" . }}
           envFrom:
             - secretRef:
-                name: {{ template "errbit.fullname" . }}
+                name: {{ template "errbit-helm.fullname" . }}
             - configMapRef:
-                name: {{ template "errbit.fullname" . }}
+                name: {{ template "errbit-helm.fullname" . }}
           volumeMounts:
             - name: entrypoint-config-volume
               mountPath: /usr/local/bin/docker-entrypoint.sh
@@ -65,7 +65,7 @@ spec:
       volumes:
         - name: entrypoint-config-volume
           configMap:
-            name: {{ template "errbit.fullname" . }}-files
+            name: {{ template "errbit-helm.fullname" . }}-files
             items:
               - key: docker-entrypoint.sh
                 path: docker-entrypoint.sh

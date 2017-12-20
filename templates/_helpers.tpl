@@ -2,7 +2,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "errbit.name" -}}
+{{- define "errbit-helm.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
@@ -10,7 +10,7 @@ Expand the name of the chart.
 Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 */}}
-{{- define "errbit.fullname" -}}
+{{- define "errbit-helm.fullname" -}}
 {{- $name := default .Chart.Name .Values.nameOverride -}}
 {{- printf "%s-%s" .Release.Name $name | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
@@ -20,7 +20,7 @@ Return the mongodb host
 If the mongodb dependency is enabled, it will return the mongodb host
 Otherwise it will return the set value
 */}}
-{{- define "errbit.mongodbHost" -}}
+{{- define "errbit-helm.mongodbHost" -}}
 {{- if .Values.mongodb.enabled -}}
 {{- template "mongodb.fullname" . -}}
 {{- else -}}
@@ -32,7 +32,7 @@ Otherwise it will return the set value
 Return the mongodb port
 It will return the set value
 */}}
-{{- define "errbit.mongodbPort" -}}
+{{- define "errbit-helm.mongodbPort" -}}
 {{- .Values.mongodbPort -}}
 {{- end -}}
 
@@ -41,7 +41,7 @@ Return the mongodb username
 If the mongodb dependency is enabled, it will return the mongodb username
 Otherwise it will return the set value
 */}}
-{{- define "errbit.mongodbUsername" -}}
+{{- define "errbit-helm.mongodbUsername" -}}
 {{- if .Values.mongodb.enabled -}}
 {{- .Values.mongodb.mongodbUsername -}}
 {{- else -}}
@@ -54,7 +54,7 @@ Return the mongodb database
 If the mongodb dependency is enabled, it will return the mongodb database
 Otherwise it will return the set value
 */}}
-{{- define "errbit.mongodbDatabase" -}}
+{{- define "errbit-helm.mongodbDatabase" -}}
 {{- if .Values.mongodb.enabled -}}
 {{- .Values.mongodb.mongodbDatabase -}}
 {{- else -}}

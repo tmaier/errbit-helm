@@ -1,12 +1,12 @@
 {{- if .Values.ingress.enabled -}}
-{{- $serviceName := include "errbit.fullname" . -}}
+{{- $serviceName := include "errbit-helm.fullname" . -}}
 {{- $servicePort := .Values.service.externalPort -}}
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: {{ template "errbit.fullname" . }}
+  name: {{ template "errbit-helm.fullname" . }}
   labels:
-    app: {{ template "errbit.name" . }}
+    app: {{ template "errbit-helm.name" . }}
     chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}

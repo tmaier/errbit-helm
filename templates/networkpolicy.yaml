@@ -2,16 +2,16 @@
 kind: NetworkPolicy
 apiVersion: networking.k8s.io/v1
 metadata:
-  name: {{ template "errbit.fullname" . }}
+  name: {{ template "errbit-helm.fullname" . }}
   labels:
-    app: {{ template "errbit.name" . }}
+    app: {{ template "errbit-helm.name" . }}
     chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
   podSelector:
     matchLabels:
-      app: {{ template "errbit.name" . }}
+      app: {{ template "errbit-helm.name" . }}
   ingress:
     # Allow inbound connections
     - ports:
