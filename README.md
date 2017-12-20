@@ -8,6 +8,7 @@ See <https://github.com/errbit/errbit>
 ## TL;DR;
 
 ```bash
+$ helm repo add errbit http://tobiasmaier.info/errbit-helm/
 $ helm install errbit/errbit
 ```
 
@@ -20,6 +21,12 @@ This chart bootstraps an Errbit deployment on a [Kubernetes](http://kubernetes.i
 - Kubernetes 1.8+ with Beta APIs enabled
 
 ## Installing the Chart
+
+First, add the relevant chart repository.
+
+```bash
+$ helm repo add errbit http://tobiasmaier.info/errbit-helm/
+```
 
 To install the chart with the release name `my-errbit`:
 
