@@ -60,6 +60,10 @@ config:
 configSecure: 
   SECRET_KEY_BASE: "please change me"
 
+## Sets whether the database shall be setup when
+## the helm chart gets installed
+bootstrapErrbit: true
+
 networkPolicy:
   ## Enable creation of NetworkPolicy resources.
   ##

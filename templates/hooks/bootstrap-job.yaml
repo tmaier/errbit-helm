@@ -1,0 +1,59 @@
+{{- if .Values.bootstrapErrbit -}}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ template "errbit-helm.fullname" . }}-hook-bootstrap
+  labels:
+    app: {{ template "errbit-helm.name" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+  annotations:
+    helm.sh/hook: post-install
+    helm.sh/hook-delete-policy: hook-succeeded
+spec:
+  template:
+    metadata:
+      labels:
+        app: {{ template "errbit-helm.name" . }}
+        chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+        release: {{ .Release.Name }}
+        heritage: {{ .Release.Service }}
+      annotations:
+        checksum/secret: {{ include (print $.Template.BasePath "/secret.yaml") . | sha256sum }}
+        checksum/config: {{ include (print $.Template.BasePath "/cm.yaml") . | sha256sum }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          args: ["bin/rake", "errbit:bootstrap"]
+          env:
+            - name: MONGODB_USERNAME
+              value: {{ template "errbit-helm.mongodbUsername" . }}
+            {{- if .Values.mongodb.enabled }}
+            - name: MONGODB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "mongodb.fullname" . }}
+                  key: mongodb-password
+            {{- end }}
+            - name: MONGODB_HOST
+              value: {{ template "errbit-helm.mongodbHost" . }}
+            - name: MONGODB_PORT
+              value: {{ template "errbit-helm.mongodbPort" . }}
+            - name: MONGODB_DATABASE
+              value: {{ template "errbit-helm.mongodbDatabase" . }}
+          envFrom:
+            - secretRef:
+                name: {{ template "errbit-helm.fullname" . }}
+            - configMapRef:
+                name: {{ template "errbit-helm.fullname" . }}
+          resources:
+{{ toYaml .Values.batch.resources | indent 12 }}
+      restartPolicy: Never
+    {{- if .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml .Values.nodeSelector | indent 8 }}
+    {{- end }}
+{{- end -}}
