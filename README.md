@@ -9,7 +9,7 @@ See <https://github.com/errbit/errbit>
 
 ```bash
 $ helm repo add errbit http://tobiasmaier.info/errbit-helm/
-$ helm install errbit/errbit
+$ helm install errbit/errbit-helm
 ```
 
 ## Introduction
@@ -31,7 +31,7 @@ $ helm repo add errbit http://tobiasmaier.info/errbit-helm/
 To install the chart with the release name `my-errbit`:
 
 ```bash
-$ helm install --name my-errbit errbit/errbit
+$ helm install --name my-errbit errbit/errbit-helm
 ```
 
 The command deploys Errbit on the Kubernetes cluster in the default configuration. The [configuration](#configuration) section lists the parameters that can be configured during installation.
@@ -59,13 +59,13 @@ Specify each parameter using the `--set key=value[,key=value]` argument to `helm
 ```bash
 $ helm install --name my-errbit \
   --set image=my-image \
-    errbit/errbit
+    errbit/errbit-helm
 ```
 
 Alternatively, a YAML file that specifies the values for the parameters can be provided while installing the chart. For example,
 
 ```bash
-$ helm install --name my-errbit -f values.yaml errbit/errbit
+$ helm install --name my-errbit -f values.yaml errbit/errbit-helm
 ```
 
 > **Tip**: You can use the default [values.yaml](values.yaml)
