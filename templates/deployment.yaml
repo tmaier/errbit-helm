@@ -22,8 +22,6 @@ spec:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          command: ["docker-entrypoint.sh"]
-          args: ["puma", "-C", "config/puma.default.rb"]
           ports:
             - containerPort: {{ .Values.service.internalPort }}
           env:
@@ -47,11 +45,6 @@ spec:
                 name: {{ template "errbit-helm.fullname" . }}
             - configMapRef:
                 name: {{ template "errbit-helm.fullname" . }}
-          volumeMounts:
-            - name: entrypoint-config-volume
-              mountPath: /usr/local/bin/docker-entrypoint.sh
-              subPath: docker-entrypoint.sh
-              readOnly: true
           livenessProbe:
             httpGet:
               path: /health/liveness
@@ -62,13 +55,6 @@ spec:
               port: {{ .Values.service.internalPort }}
           resources:
 {{ toYaml .Values.resources | indent 12 }}
-      volumes:
-        - name: entrypoint-config-volume
-          configMap:
-            name: {{ template "errbit-helm.fullname" . }}-files
-            items:
-              - key: docker-entrypoint.sh
-                path: docker-entrypoint.sh
     {{- if .Values.nodeSelector }}
       nodeSelector:
 {{ toYaml .Values.nodeSelector | indent 8 }}
