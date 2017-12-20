@@ -24,6 +24,11 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - containerPort: {{ .Values.service.internalPort }}
+          envFrom:
+            - secretRef:
+                name: {{ template "errbit.fullname" . }}
+            - configMapRef:
+                name: {{ template "errbit.fullname" . }}
           livenessProbe:
             httpGet:
               path: /health/liveness
