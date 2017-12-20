@@ -43,3 +43,4 @@ spec:
       nodeSelector:
 {{ toYaml .Values.nodeSelector | indent 8 }}
     {{- end }}
+  revisionHistoryLimit: {{ .Values.revisionHistoryLimit }}
