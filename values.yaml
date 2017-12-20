@@ -4,7 +4,7 @@
 revisionHistoryLimit: 2
 replicaCount: 1
 image:
-  repository: errbit/errbit
+  repository: tmaier/errbit-helm
   tag: latest
   pullPolicy: Always
 service:
