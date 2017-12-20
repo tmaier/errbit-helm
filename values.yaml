@@ -11,7 +11,7 @@ service:
   name: http
   type: ClusterIP
   externalPort: 80
-  internalPort: 80
+  internalPort: 8080
 ingress:
   enabled: false
   # Used to create an Ingress record.
@@ -49,6 +49,7 @@ resources: {}
 ## See https://github.com/errbit/errbit/blob/master/docs/configuration.md for the available environment variables
 ## You can store them in config and configSecure. The difference is that the one uses a ConfigMap, the other a Secret
 config:
+  PORT: '8080'
   ERRBIT_ENFORCE_SSL: "false"
 configSecure: 
   SECRET_KEY_BASE: "please change me"
