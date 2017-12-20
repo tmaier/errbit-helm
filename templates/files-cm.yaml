@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "librario-library-backend.fullname" . }}-files
+  labels:
+    app: {{ template "librario-library-backend.name" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+data:
+{{ (tpl (.Files.Glob "configs/*").AsConfig . ) | indent 2 }}
