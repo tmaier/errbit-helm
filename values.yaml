@@ -36,6 +36,14 @@ resources: {}
   # requests:
   #  cpu: 100m
   #  memory: 128Mi
+## Configure access to an external database
+## For these settings to be used you need to disable
+## the included postgresql database below
+# mongodbHost:
+# mongodbPort: 27017
+# mongodbPassword:
+# mongodbUsername:
+# mongodbDatabase: errbit
 config: {}
 configSecure: {}
 networkPolicy:
