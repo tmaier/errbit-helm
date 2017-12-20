@@ -44,8 +44,15 @@ resources: {}
 # mongodbPassword:
 # mongodbUsername:
 # mongodbDatabase: errbit
-config: {}
-configSecure: {}
+
+## Configure Errbit
+## See https://github.com/errbit/errbit/blob/master/docs/configuration.md for the available environment variables
+## You can store them in config and configSecure. The difference is that the one uses a ConfigMap, the other a Secret
+config:
+  ERRBIT_ENFORCE_SSL: "false"
+configSecure: 
+  SECRET_KEY_BASE: "please change me"
+
 networkPolicy:
   ## Enable creation of NetworkPolicy resources.
   ##
