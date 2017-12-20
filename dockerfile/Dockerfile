@@ -8,7 +8,7 @@ LABEL \
 
 USER root
 
-COPY --chown=errbit:errbit docker-entrypoint.sh /usr/local/bin/
+COPY docker-entrypoint.sh /usr/local/bin/
 
 USER errbit
 
