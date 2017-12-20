@@ -9,5 +9,5 @@ metadata:
     heritage: {{ .Release.Service }}
 data:
   {{- range $key, $value := .Values.config }}
-    {{ $key | upper }}: {{ $value | b64enc | quote}}
+    {{ $key | upper }}: {{ $value | quote}}
   {{- end }}
