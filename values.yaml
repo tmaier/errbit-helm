@@ -42,5 +42,8 @@ networkPolicy:
   ## Enable creation of NetworkPolicy resources.
   ##
   enabled: false
+## Configuration values for the mongodb dependency.
+## ref: https://github.com/kubernetes/charts/blob/master/stable/mongodb/README.md
+##
 mongodb:
   enabled: true
