@@ -47,3 +47,9 @@ networkPolicy:
 ##
 mongodb:
   enabled: true
+  mongodbUsername: errbit
+  mongodbPassword: errbit
+  mongodbDatabase: errbit
+  persistence:
+    ## Consider to reduce the allocated disk space to fit the need
+    # size: 8Gi
