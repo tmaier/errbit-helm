@@ -14,3 +14,50 @@ We truncate at 63 chars because some Kubernetes name fields are limited to this 
 {{- $name := default .Chart.Name .Values.nameOverride -}}
 {{- printf "%s-%s" .Release.Name $name | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
+
+{{/*
+Return the mongodb host
+If the mongodb dependency is enabled, it will return the mongodb host
+Otherwise it will return the set value
+*/}}
+{{- define "errbit.mongodbHost" -}}
+{{- if .Values.mongodb.enabled -}}
+{{- template "mongodb.fullname" . -}}
+{{- else -}}
+{{- required "Value mongodbHost must be set" .Values.mongodbHost -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
+Return the mongodb port
+It will return the set value
+*/}}
+{{- define "errbit.mongodbPort" -}}
+{{- .Values.mongodbPort -}}
+{{- end -}}
+
+{{/*
+Return the mongodb username
+If the mongodb dependency is enabled, it will return the mongodb username
+Otherwise it will return the set value
+*/}}
+{{- define "errbit.mongodbUsername" -}}
+{{- if .Values.mongodb.enabled -}}
+{{- .Values.mongodb.mongodbUsername -
+{{- else -}}
+{{- default "" .Values.mongodbUsername -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
+Return the mongodb database
+If the mongodb dependency is enabled, it will return the mongodb database
+Otherwise it will return the set value
+*/}}
+{{- define "errbit.mongodbDatabase" -}}
+{{- if .Values.mongodb.enabled -}}
+{{- .Values.mongodb.mongodbDatabase -
+{{- else -}}
+{{- required "Value mongodbDatabase must be set" .Values.mongodbDatabase -}}
+{{- end -}}
+{{- end -}}

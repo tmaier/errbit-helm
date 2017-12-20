@@ -26,6 +26,22 @@ spec:
           args: ["puma", "-C", "config/puma.default.rb"]
           ports:
             - containerPort: {{ .Values.service.internalPort }}
+          env:
+            - name: MONGODB_USERNAME
+              value: {{ template "errbit.mongodbUsername" . }}
+            {{- if .Values.mongodb.enabled }}
+            - name: MONGODB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "mongodb.fullname" . }}
+                  key: mongodb-password
+            {{- end }}
+            - name: MONGODB_HOST
+              value: {{ template "errbit.mongodbHost" . }}
+            - name: MONGODB_PORT
+              value: {{ template "errbit.mongodbPort" . }}
+            - name: MONGODB_DATABASE
+              value: {{ template "errbit.mongodbDatabase" . }}
           envFrom:
             - secretRef:
                 name: {{ template "errbit.fullname" . }}
