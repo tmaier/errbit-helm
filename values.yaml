@@ -69,7 +69,8 @@ config:
   ERRBIT_PROTOCOL: http
   ERRBIT_USE_GRAVATAR: "true"
   PORT: '8080'
-  RACK_ENV: production
+  RACK_ENV: deployment
+  RAILS_ENV: production
 configSecure: 
   SECRET_KEY_BASE: "please change me"
 
