@@ -2,7 +2,20 @@ apiVersion: v1
 entries:
   errbit-helm:
   - apiVersion: v1
-    created: 2017-12-20T22:13:09.985012547+01:00
+    created: 2017-12-21T00:27:34.117302346+01:00
+    description: Deploys Errbit. Errbit is a tool for collecting and managing errors
+      from other applications
+    digest: 28eb762cecf27dd22afd3210205400ab7a81edc05488373594cebfbd66f4cf06
+    icon: https://errbit.com/images/apps.png
+    name: errbit-helm
+    sources:
+    - https://github.com/tmaier/errbit-helm
+    - https://github.com/errbit/errbit
+    urls:
+    - http://tobiasmaier.info/errbit-helm/errbit-helm-0.3.0.tgz
+    version: 0.3.0
+  - apiVersion: v1
+    created: 2017-12-21T00:27:34.116053309+01:00
     description: Deploys Errbit. Errbit is a tool for collecting and managing errors
       from other applications
     digest: 6b134aa59ef7eebc0caa2970e4d9b344619b0a0e0437535094828943ae29194e
@@ -15,7 +28,7 @@ entries:
     - http://tobiasmaier.info/errbit-helm/errbit-helm-0.2.0.tgz
     version: 0.2.0
   - apiVersion: v1
-    created: 2017-12-20T22:13:09.984361695+01:00
+    created: 2017-12-21T00:27:34.114357458+01:00
     description: A Helm chart for Kubernetes
     digest: d9533933b6e397ae4be80988716e393d476cb65cbf59358b946ca6c130c39608
     icon: https://errbit.com/images/apps.png
@@ -26,4 +39,4 @@ entries:
     urls:
     - http://tobiasmaier.info/errbit-helm/errbit-helm-0.1.0.tgz
     version: 0.1.0
-generated: 2017-12-20T22:13:09.983505275+01:00
+generated: 2017-12-21T00:27:34.113001472+01:00
