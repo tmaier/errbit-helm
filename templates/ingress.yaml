@@ -1,6 +1,7 @@
 {{- if .Values.ingress.enabled -}}
 {{- $serviceName := include "errbit-helm.fullname" . -}}
 {{- $servicePort := .Values.service.externalPort -}}
+{{- $ingressHostPath := .Values.ingress.hostPath -}}
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
@@ -20,7 +21,7 @@ spec:
     - host: {{ $host | quote }}
       http:
         paths:
-          - path: {{ .Values.ingress.path }}
+          - path: {{ $ingressHostPath }}
             backend:
               serviceName: {{ $serviceName }}
               servicePort: {{ $servicePort }}
