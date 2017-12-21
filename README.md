@@ -1,6 +1,6 @@
 # Errbit Helm Chart
 
-**CAUTION**: This is a an early alpha release. Some of the instructions below are not implemented yet.
+**CAUTION**: This is a an early alpha release. It needs your input and feedback. ([see issues](https://github.com/tmaier/errbit-helm/issues))
 
 > Errbit is a tool for collecting and managing errors from other applications
 See <https://github.com/errbit/errbit>
