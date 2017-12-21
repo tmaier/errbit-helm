@@ -27,7 +27,7 @@ spec:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          args: ["bin/rake", "errbit:bootstrap"]
+          args: ["rake", "errbit:bootstrap"]
           env:
             - name: MONGODB_USERNAME
               value: {{ template "errbit-helm.mongodbUsername" . }}
