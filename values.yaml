@@ -63,6 +63,8 @@ batch:
 ## See https://github.com/errbit/errbit/blob/master/docs/configuration.md for the available environment variables
 ## You can store them in config and configSecure. The difference is that the one uses a ConfigMap, the other a Secret
 config:
+  ERRBIT_ADMIN_EMAIL: errbit@example.com
+  ERRBIT_ADMIN_USER: errbit
   ERRBIT_EMAIL_FROM: "errbit.noreply@example.com"
   ERRBIT_ENFORCE_SSL: "false"
   ERRBIT_HOST: "errbit.example.local"
@@ -73,6 +75,7 @@ config:
   RACK_ENV: deployment
   RAILS_ENV: production
 configSecure:
+  ERRBIT_ADMIN_PASSWORD: password
   SECRET_KEY_BASE: "please change me"
 
 ## Sets whether the database shall be setup when
