@@ -1,5 +1,10 @@
 # Errbit Helm Chart
 
+[![Docker Automated buil](https://img.shields.io/docker/automated/tmaier/errbit-helm.svg)](https://hub.docker.com/r/tmaier/errbit-helm/)
+[![Docker Pulls](https://img.shields.io/docker/pulls/tmaier/errbit-helm.svg)](https://hub.docker.com/r/tmaier/errbit-helm/)
+[![GitHub issues](https://img.shields.io/github/issues/tmaier/errbit-helm.svg)](https://github.com/tmaier/errbit-helm/issues)
+[![GitHub stars](https://img.shields.io/github/stars/tmaier/errbit-helm.svg?style=social&label=Star)](https://github.com/tmaier/errbit-helm)
+
 **CAUTION**: This is a an early alpha release. It needs your input and feedback. ([see issues](https://github.com/tmaier/errbit-helm/issues))
 
 > Errbit is a tool for collecting and managing errors from other applications
