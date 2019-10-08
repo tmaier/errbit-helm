@@ -1,4 +1,4 @@
-FROM errbit/errbit:latest
+FROM errbit/errbit:v0.8.0
 
 LABEL \
   maintainer="Tobias L. Maier <me@tobiasmaier.info>" \
@@ -6,11 +6,7 @@ LABEL \
   org.label-schema.name="Errbit with Entrypoint script" \
   org.label-schema.vcs-url="https://github.com/tmaier/errbit-helm"
 
-USER root
-
 COPY docker-entrypoint.sh /usr/local/bin/
-
-USER errbit
 
 CMD ["puma","-C","config/puma.default.rb"]
 ENTRYPOINT ["docker-entrypoint.sh"]
