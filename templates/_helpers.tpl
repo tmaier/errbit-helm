@@ -52,7 +52,7 @@ Otherwise it will return the set value
 */}}
 {{- define "errbit-helm.mongodbUsername" -}}
 {{- if .Values.mongodb.enabled -}}
-{{- .Values.mongodb.mongodbUsername -}}
+{{- .Values.mongodb.auth.username -}}
 {{- else -}}
 {{- default "" .Values.mongodbUsername -}}
 {{- end -}}
@@ -65,7 +65,7 @@ Otherwise it will return the set value
 */}}
 {{- define "errbit-helm.mongodbDatabase" -}}
 {{- if .Values.mongodb.enabled -}}
-{{- .Values.mongodb.mongodbDatabase -}}
+{{- .Values.mongodb.auth.database -}}
 {{- else -}}
 {{- required "Value mongodbDatabase must be set" .Values.mongodbDatabase -}}
 {{- end -}}
