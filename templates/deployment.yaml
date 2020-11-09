@@ -9,6 +9,10 @@ metadata:
     heritage: {{ .Release.Service }}
 spec:
   replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "errbit-helm.name" . }}
+      release: {{ .Release.Name }}
   template:
     metadata:
       labels:

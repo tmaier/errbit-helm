@@ -1,6 +1,6 @@
 dependencies:
 - name: mongodb
-  repository: https://kubernetes-charts.storage.googleapis.com
-  version: 0.4.21
-digest: sha256:fbb8f1eb5df619d8355a343a815e1512bdf6dfd28e58464c259d5f3ef980c248
-generated: 2017-12-20T18:06:35.908680542+01:00
+  repository: https://charts.bitnami.com/bitnami
+  version: ^9.3.1
+digest: sha256:f24132b7904503984a3354c0b3356a3fb96fc434d7c74c429f0e3391fc264ad1
+generated: "2020-11-09T14:42:07.879391-07:00"
