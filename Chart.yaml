@@ -1,7 +1,7 @@
 apiVersion: v1
 description: Deploys Errbit. Errbit is a tool for collecting and managing errors from other applications
 name: errbit-helm
-version: 0.4.1
+version: 0.4.2
 sources:
   - https://github.com/tmaier/errbit-helm
   - https://github.com/errbit/errbit
