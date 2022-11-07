@@ -22,27 +22,15 @@ spec:
         checksum/secret: {{ include (print $.Template.BasePath "/secret.yaml") . | sha256sum }}
         checksum/config: {{ include (print $.Template.BasePath "/cm.yaml") . | sha256sum }}
     spec:
+    {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          args: ["rake", "db:migrate", "db:mongoid:remove_undefined_indexes", "db:mongoid:create_indexes"]
-          env:
-            - name: MONGODB_USERNAME
-              value: {{ template "errbit-helm.mongodbUsername" . }}
-            {{- if .Values.mongodb.enabled }}
-            - name: MONGODB_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "mongodb.fullname" . }}
-                  key: mongodb-password
-            {{- end }}
-            - name: MONGODB_HOST
-              value: {{ template "errbit-helm.mongodbHost" . }}
-            - name: MONGODB_PORT
-              value: {{ template "errbit-helm.mongodbPort" . }}
-            - name: MONGODB_DATABASE
-              value: {{ template "errbit-helm.mongodbDatabase" . }}
+          args: ["bundle", "exec", "rake", "db:migrate", "db:mongoid:remove_undefined_indexes", "db:mongoid:create_indexes"]
           envFrom:
             - secretRef:
                 name: {{ template "errbit-helm.fullname" . }}
