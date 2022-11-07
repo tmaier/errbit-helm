@@ -6,8 +6,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Added
+- Add new probe support
+- Make probes configurable by end-user
 - Add `CHANGELOG` to the project. It is a file which contains a curated, chronologically ordered list of notable changes for each version of a project
 - Add `ERRBIT_ADMIN_EMAIL`, `ERRBIT_ADMIN_USER` and `ERRBIT_ADMIN_PASSWORD` to `values.yaml`.
+
+### Changed
+- Use upstream docker image, because presumably it is more updated
+
+### Fixed
+- Fix usage of old deprecated API.
 
 ## [0.4.0] - 2017-12-21
 ### Added

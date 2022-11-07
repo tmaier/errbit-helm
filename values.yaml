@@ -5,9 +5,8 @@ revisionHistoryLimit: 2
 replicaCount: 1
 imagePullSecrets: []
 image:
-  repository: tmaier/errbit-helm
-  tag: latest
-  pullPolicy: Always
+  repository: errbit/errbit
+  tag: v0.9.0
 service:
   name: http
   type: ClusterIP
@@ -15,7 +14,7 @@ service:
   internalPort: 8080
 ingress:
   enabled: false
-  path: '/*'
+  path: '/'
   # Used to create an Ingress record.
   hosts:
     - errbit.example.local
@@ -51,14 +50,25 @@ batch:
     #  cpu: 50m
     #  memory: 512Mi
 
+probes:
+  livenessProbe:
+    httpGet:
+      path: /health/liveness
+      port: http
+    initialDelaySeconds: 60
+    periodSeconds: 10
+    successThreshold: 1
+    timeoutSeconds: 60
+    failureThreshold: 6
+  readinessProbe:
+    httpGet:
+      path: /health/readiness
+      port: http
+
 ## Configure access to an external database
 ## For these settings to be used you need to disable
-## the included postgresql database below
-# mongodbHost:
-# mongodbPort: 27017
-# mongodbPassword:
-# mongodbUsername:
-# mongodbDatabase: errbit
+## the included mongodb database below
+# mongodbUri: mongodb://localhost/errbit
 
 ## Configure Errbit
 ## See https://github.com/errbit/errbit/blob/master/docs/configuration.md for the available environment variables

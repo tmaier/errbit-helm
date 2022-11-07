@@ -31,41 +31,28 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
-            - containerPort: {{ .Values.service.internalPort }}
-          env:
-            - name: MONGODB_USERNAME
-              value: {{ template "errbit-helm.mongodbUsername" . }}
-            {{- if .Values.mongodb.enabled }}
-            - name: MONGODB_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "mongodb.fullname" . }}
-                  key: mongodb-password
-            {{- end }}
-            - name: MONGODB_HOST
-              value: {{ template "errbit-helm.mongodbHost" . }}
-            - name: MONGODB_PORT
-              value: {{ template "errbit-helm.mongodbPort" . }}
-            - name: MONGODB_DATABASE
-              value: {{ template "errbit-helm.mongodbDatabase" . }}
+            - name: http
+              containerPort: {{ .Values.service.internalPort }}
+              protocol: TCP
           envFrom:
             - secretRef:
                 name: {{ template "errbit-helm.fullname" . }}
             - configMapRef:
                 name: {{ template "errbit-helm.fullname" . }}
+          {{- if .Values.probes }}
+          {{- if .Values.probes.livenessProbe }}
           livenessProbe:
-            httpGet:
-              path: /health/liveness
-              port: {{ .Values.service.internalPort }}
-            initialDelaySeconds: 60
-            periodSeconds: 10
-            successThreshold: 1
-            timeoutSeconds: 60
-            failureThreshold: 6
+            {{- toYaml .Values.probes.livenessProbe | nindent 12 }}
+          {{- end }}
+          {{- if .Values.probes.startupProbe }}
+          startupProbe:
+            {{- toYaml .Values.probes.startupProbe | nindent 12 }}
+          {{- end }}
+          {{- if .Values.probes.readinessProbe }}
           readinessProbe:
-            httpGet:
-              path: /health/readiness
-              port: {{ .Values.service.internalPort }}
+            {{- toYaml .Values.probes.readinessProbe | nindent 12 }}
+          {{- end }}
+          {{- end }}
           resources:
 {{ toYaml .Values.resources | indent 12 }}
     {{- if .Values.nodeSelector }}

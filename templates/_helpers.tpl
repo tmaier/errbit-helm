@@ -70,3 +70,16 @@ Otherwise it will return the set value
 {{- required "Value mongodbDatabase must be set" .Values.mongodbDatabase -}}
 {{- end -}}
 {{- end -}}
+
+{{/*
+Return the mongodb URI
+If the mongodb dependency is enabled, it will return the mongodb database
+Otherwise it will return the set value
+*/}}
+{{- define "errbit-helm.mongodbUri" -}}
+{{- if .Values.mongodb.enabled -}}
+{{- printf "mongodb://%s:%s@%s/%s" .Values.mongodb.auth.username .Values.mongodb.auth.password (include "errbit-helm.mongodbHost" .) .Values.mongodb.auth.database -}}
+{{- else -}}
+{{- required "Value mongodbUri must be set" .Values.mongodbUri -}}
+{{- end -}}
+{{- end -}}
